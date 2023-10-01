@@ -1063,6 +1063,7 @@ resource "aws_nat_gateway" "this" {
     local.nat_gateway_ips,
     var.single_nat_gateway ? 0 : count.index,
   )
+  secondary_allocation_ids = try(var.secondary_allocation_ids, [])
   subnet_id = element(
     aws_subnet.public[*].id,
     var.single_nat_gateway ? 0 : count.index,
